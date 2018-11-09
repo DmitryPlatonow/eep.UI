@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import React from 'react';
-import ReactDOM from 'react-dom';
+
 import { Button, FormControlLabel, TextField,  Checkbox } from "@material-ui/core"
 
 
 
-class App extends Component {
+class Project extends Component {
   state = {
     projectName: '',
     description: '',
@@ -85,4 +84,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Project;
