@@ -1,9 +1,0 @@
-.App {
-  text-align: center;
-  background-color: lightgrey;
-}
-
-.create-project-form {
-  display: flex;
-  flex-direction: column;
-}

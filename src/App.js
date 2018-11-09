@@ -1,35 +1,12 @@
-import React, { Fragment } from "react";
-import MenuAppBar from "./components/header";
-import { AppDrawer } from "./components/drawer";
-import {Route} from 'react-router-dom';
-import Project from './components/project'
-import './App.css'
+import React, { Component, Fragment } from 'react';
+import { Header } from './Componets/Header';
 
-export default class App extends React.Component {
-constructor(props){
-  super(props)
 
-  this.state ={
-    isDrawerOpen: false
-  }
-}
-
+export default class extends Component {
   render() {
-    return (
-      <Fragment>
-        <MenuAppBar
-        onLeftMenuClick={() => this.setState({isDrawerOpen: true})}
-        />
+    return <Fragment>
+      <Header />
 
-        <AppDrawer 
-        open = {this.state.isDrawerOpen}
-        onToggle = {({isDrawerOpen})=> this.setState({isDrawerOpen})}
-        />
-    
-        
-        <Route path='/' exact render={() => <h1>Home</h1>} />
-        <Route path='/project' component= {Project} /> 
-      </Fragment>
-    );
+    </Fragment>
   }
 }
