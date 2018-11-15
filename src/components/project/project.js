@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
 import { Button, FormControlLabel, TextField,  Checkbox } from "@material-ui/core"
-
-
 
 class Project extends Component {
   state = {
@@ -19,14 +16,12 @@ class Project extends Component {
       method: "post",
       headers: {
         'Content-type': 'application/json',
-        'Accept': 'application/json'
+         'Accept': 'application/json'
       },
       body: JSON.stringify(this.state)
     })
     .then((response) => response.json())
-    .then((result) => {
-      console.log(result)
-    })
+    // .then(r => console.log('--response', r))
   }
 
   render() {
@@ -79,7 +74,6 @@ class Project extends Component {
           <Button onClick={this.createProject} >Add Project</Button>
         </div>
       </div>
-
     );
   }
 }
