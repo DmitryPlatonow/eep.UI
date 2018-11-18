@@ -2,15 +2,27 @@ import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
 
-export const AppDrawer = props => {
+const styles = {
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: "auto"
+  }
+};
+
+function AppDrawer(props) {
+  const { classes } = props;
   return (
     <Drawer
+      className={classes.list}
       open={props.open}
       docked="false"
       onClose={open => props.onToggle(open)}
     >
-      <MenuItem  component={Link} to="/">
+      <MenuItem component={Link} to="/">
         Main Page
       </MenuItem>
       <MenuItem component={Link} to="/project">
@@ -21,4 +33,6 @@ export const AppDrawer = props => {
       </MenuItem>
     </Drawer>
   );
-};
+}
+
+export default withStyles(styles)(AppDrawer);

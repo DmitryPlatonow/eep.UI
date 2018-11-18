@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import MenuAppBar from "./components/header";
-import { AppDrawer } from "./components/drawer";
+import  AppDrawer  from "./components/drawer";
 import { Route } from "react-router-dom";
 
 import MainPage from "./components/mainPage";
@@ -30,7 +30,9 @@ export default class App extends React.Component {
         />
 
         <Route path="/" exact component={MainPage} />
-        <Route path="/project" component={Project} />
+
+        <Route path="/project" component={Project} />    
+        <Route path="/project/:id" component={Project} />
         <Route path="/projects" component={TableProjects} />
       </Fragment>
     );
