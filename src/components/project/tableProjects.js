@@ -35,20 +35,20 @@ class EnhancedTable extends React.Component {
 
   handleSelectAllClick = event => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.ProjectId) }));
+      this.setState(state => ({ selected: state.data.map(n => n.projectId) }));
       return;
     }
     this.setState({ selected: [] });
   };
 
-  handleClick = (event, ProjectId) => {
+  handleClick = (event, projectId) => {
     const { selected } = this.state;
-    const selectedIndex = selected.indexOf(ProjectId);   
+    const selectedIndex = selected.indexOf(projectId);   
  
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, ProjectId);
+      newSelected = newSelected.concat(selected, projectId);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -89,28 +89,28 @@ class EnhancedTable extends React.Component {
             />
             <TableBody>
               {this.state.data.map(project => {
-                const isSelected = this.isSelected(project.ProjectId);
+                const isSelected = this.isSelected(project.projectId);
                 return (
                   <TableRow
                     hover
                     onClick={event =>
-                      this.handleClick(event, project.ProjectId)
+                      this.handleClick(event, project.projectId)
                     }
                     role="checkbox"
                     tabIndex={-1}
-                    key={project.ProjectId}
+                    key={project.projectId}
                     selected={isSelected}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox checked={isSelected} />
                     </TableCell>
                     <TableCell component="th" scope="row" padding="none">
-                      {project.ProjectName}
+                      {project.projectName}
                     </TableCell>
-                    <TableCell numeric>{project.Description}</TableCell>
-                    <TableCell numeric>{project.StartProjectDate}</TableCell>
-                    <TableCell numeric>{project.EndProjectDate}</TableCell>
-                    <TableCell numeric>{project.ProjectState === 0 ? 14
+                    <TableCell numeric>{project.description}</TableCell>
+                    <TableCell numeric>{project.startProjectDate}</TableCell>
+                    <TableCell numeric>{project.endProjectDate}</TableCell>
+                    <TableCell numeric>{project.projectState === 0 ? 14
                     : 2
     
                      

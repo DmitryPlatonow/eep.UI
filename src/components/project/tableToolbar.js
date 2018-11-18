@@ -11,9 +11,7 @@ import { Link } from "react-router-dom";
 
 export  const TableToolbar = props => {
     const { numSelected, projectId } = props;
-
-   // console.log('----pId', projectId);
-    
+        
     return (
       <Toolbar >
         <Tooltip title="Add" >

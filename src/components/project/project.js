@@ -5,7 +5,6 @@ import {
   TextField,
   Checkbox
 } from "@material-ui/core";
-import moment from "moment"
 
 class Project extends Component {  
   constructor(props) {
@@ -37,11 +36,11 @@ class Project extends Component {
       .then(res => res.json())
       .then(data => this.setState(
         { 
-          projectName: data.ProjectName,
-          description: data.Description, 
-          startProjectDate:  moment(data.StartProjectDate).format("YYYY-DD-MM"),
-          endProjectDate: moment(data.EndProjectDate).format("YYYY-DD-MM") ,
-          projectState: data.ProjectState
+          projectName: data.projectName,
+          description: data.description, 
+          startProjectDate:  data.startProjectDate,
+          endProjectDate: data.endProjectDate ,
+          projectState: data.projectState
         }
         )
         );
