@@ -31,6 +31,9 @@ function AppDrawer(props) {
       <MenuItem component={Link} to="/projects">
         Projects
       </MenuItem>
+      <MenuItem component={Link} to="/user">
+        Add User
+      </MenuItem>
     </Drawer>
   );
 }
