@@ -6,17 +6,18 @@ import {
   Checkbox
 } from "@material-ui/core";
 
-class Project extends Component {  
+class Project extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    projectName: '',
-    description: '',
-    startProjectDate: null,
-    endProjectDate: null,
-    projectState: false
-  };
-}
+      projectId: "",
+      projectName: "",
+      description: "",
+      startProjectDate: null,
+      endProjectDate: null,
+      projectState: false
+    };
+  }
 
   createProject = () => {
     console.log(this.state);
@@ -31,19 +32,31 @@ class Project extends Component {
     // .then(r => console.log('--response', r))
   };
 
+  updateProject = () => {
+    console.log(this.state);
+    fetch(`http://localhost:50317/api/projects`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(response => response.json());
+    // .then(r => console.log('--response', r))
+  };
   componentDidMount() {
     fetch(`http://localhost:50317/api/projects/${this.props.match.params.id}`)
       .then(res => res.json())
-      .then(data => this.setState(
-        { 
+      .then(data =>
+        this.setState({
+          projectId: this.props.match.params.id,
           projectName: data.projectName,
-          description: data.description, 
-          startProjectDate:  data.startProjectDate,
-          endProjectDate: data.endProjectDate ,
+          description: data.description,
+          startProjectDate: data.startProjectDate,
+          endProjectDate: data.endProjectDate,
           projectState: data.projectState
-        }
-        )
-        );
+        })
+      );
   }
 
   render() {
@@ -55,13 +68,11 @@ class Project extends Component {
       projectState
     } = this.state;
 
-    console.log('-----props', this.props.endProjectDate)
+    console.log("-----props", this.props.endProjectDate);
 
     return (
       <div className="App">
         <div className="create-project-form">
-
-
           <TextField
             value={projectName}
             label="Project Name"
@@ -105,7 +116,14 @@ class Project extends Component {
             }
             label="Is project closed?"
           />
-          <Button onClick={this.createProject}>Add Project</Button>
+          {this.props.match.params.id !== null  
+          ? (
+            <Button onClick={this.updateProject}>Update Project</Button>
+            
+          ) 
+          : (
+            <Button onClick={this.createProject}>Add Project</Button>
+          )}
         </div>
       </div>
     );
