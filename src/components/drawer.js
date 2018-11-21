@@ -5,19 +5,16 @@ import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
-  list: {
-    width: 250
-  },
-  fullList: {
-    width: "auto"
-  }
+  draver: {
+    width: 500
+  }  
 };
 
 function AppDrawer(props) {
   const { classes } = props;
   return (
     <Drawer
-      className={classes.list}
+      className={classes.draver}
       open={props.open}
       docked="false"
       onClose={open => props.onToggle(open)}

@@ -11,9 +11,9 @@ class ProjectTableHead extends React.Component {
           <TableRow>
             <TableCell padding="checkbox">
             </TableCell>
-            <TableCell >Project name</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell numeric>Start project date</TableCell>
+            <TableCell>Employee</TableCell>
+            <TableCell>Role In Project</TableCell>
+            <TableCell numeric>Schedule</TableCell>
             <TableCell numeric>End project date</TableCell>
             <TableCell numeric>Project status</TableCell>
             <TableCell numeric>Count employee</TableCell>
@@ -24,4 +24,3 @@ class ProjectTableHead extends React.Component {
   }
 
   export default ProjectTableHead
-  

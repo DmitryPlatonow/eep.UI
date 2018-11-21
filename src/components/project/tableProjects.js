@@ -24,22 +24,14 @@ const styles = theme => ({
 });
 
 class EnhancedTable extends React.Component {
-  state = {
-    order: "asc",
-    orderBy: "calories",
-    selected: [],
-    data: [],
-    page: 0,
-    rowsPerPage: 25
-  };
-
-  handleSelectAllClick = event => {
-    if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.projectId) }));
-      return;
-    }
-    this.setState({ selected: [] });
-  };
+  constructor(props) {
+    super(props);
+    this.state = {   
+      selected: [],
+      data: []
+    };
+  }
+  
 
   handleClick = (event, projectId) => {
     const { selected } = this.state;
@@ -71,22 +63,38 @@ class EnhancedTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
+  onDeleteClick = () => {
+    console.log(this.state.selected[0]);
+    fetch(`http://localhost:50317/api/projects/${this.state.selected[0]}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(this.state.projectId)
+    })
+    this.componentDidMount();
+  };
+
+
   render() {
     const { classes } = this.props;
-    const {  order, orderBy, selected } = this.state;
+    const { selected } = this.state;
 
     return (
       <Paper className={classes.root}>
-        <TableToolbar numSelected={selected.length} projectId={selected[0]} />
+        <TableToolbar 
+        numSelected={selected.length} 
+        projectId={selected[0]} 
+        onDeleteClick={() => this.onDeleteClick()}
+        />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <ProjectTableHead
               numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
+                 onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-            />
+                        />
             <TableBody>
               {this.state.data.map(project => {
                 const isSelected = this.isSelected(project.projectId);
@@ -104,17 +112,13 @@ class EnhancedTable extends React.Component {
                     <TableCell padding="checkbox">
                       <Checkbox checked={isSelected} />
                     </TableCell>
-                    <TableCell component="th" scope="row" padding="none">
+                    <TableCell component="th" scope="row">
                       {project.projectName}
                     </TableCell>
-                    <TableCell numeric>{project.description}</TableCell>
+                    <TableCell >{project.description}</TableCell>
                     <TableCell numeric>{project.startProjectDate}</TableCell>
                     <TableCell numeric>{project.endProjectDate}</TableCell>
-                    <TableCell numeric>{project.projectState === 0 ? 14
-                    : 2
-    
-                     
-                      }</TableCell>
+                    <TableCell numeric>{(project.projectState===1)?("open"):("clouse")}</TableCell>
                     <TableCell numeric>{"000"}</TableCell>
                   </TableRow>
                 );
